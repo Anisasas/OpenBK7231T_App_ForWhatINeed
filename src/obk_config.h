@@ -214,35 +214,39 @@
 
 #elif PLATFORM_BL602
 
-// #define ENABLE_SEND_POSTANDGET				1
+// IŠSIGELBĖJIMAS: Įjungiame TuyaMCU ir UART komandas!
+#define ENABLE_DRIVER_TUYAMCU                   1
+#define ENABLE_CMD_UART                         1
+
 #define ENABLE_HA_DISCOVERY 					1
 #define ENABLE_MQTT								1
 #define ENABLE_TASMOTADEVICEGROUPS				1
 #define ENABLE_LITTLEFS							1
 #define ENABLE_NTP								1
-// #define ENABLE_TIME_DST						1
 #define ENABLE_CALENDAR_EVENTS					1
-#define ENABLE_DRIVER_LED						1
-#define ENABLE_DRIVER_BL0937					1
-#define ENABLE_DRIVER_BL0942					1
-#define ENABLE_DRIVER_CSE7766					1
+
+// IŠJUNGIAME nereikalingus LED ir matuoklių draiverius, kad sutaupytume vietos:
+#define ENABLE_DRIVER_LED						0
+#define ENABLE_DRIVER_BL0937					0
+#define ENABLE_DRIVER_BL0942					0
+#define ENABLE_DRIVER_CSE7766					0
+#define ENABLE_DRIVER_SM16703P					0
+#define ENABLE_DRIVER_PIXELANIM					0
+#define ENABLE_DRIVER_CHT83XX					0
+#define ENABLE_DRIVER_DS1820					0
+
 #define ENABLE_DRIVER_WEMO						1
 #define ENABLE_DRIVER_FREEZE					0
 #define ENABLE_DRIVER_DHT						1
 #define ENABLE_DRIVER_BRIDGE					1
-// parse things like $CH1 or $hour etc
 #define ENABLE_EXPAND_CONSTANT					1
 #define ENABLE_TASMOTA_JSON						1
 #define ENABLE_DRIVER_DDP						1
 #define ENABLE_DRIVER_SSDP						1
-#define ENABLE_DRIVER_CHT83XX					1
-#define ENABLE_DRIVER_DS1820					1
 #define ENABLE_OBK_SCRIPTING					1
 #define ENABLE_DRIVER_MDNS						1
-// #define ENABLE_I2C							1
 #define ENABLE_ADVANCED_CHANNELTYPES_DISCOVERY	1
-#define ENABLE_DRIVER_SM16703P					1
-#define ENABLE_DRIVER_PIXELANIM					1
+
 #if PLATFORM_BL_NEW
 #define NEW_TCP_SERVER							1
 #endif
@@ -250,13 +254,6 @@
 #if (OBK_VARIANT == OBK_VARIANT_BERRY)
 #define ENABLE_OBK_BERRY						1
 #endif
-
-//#if (OBK_VARIANT == OBK_VARIANT_IRREMOTEESP)
-//#undef ENABLE_DRIVER_CHT83XX
-//#undef ENABLE_DRIVER_DS1820
-//#undef ENABLE_DRIVER_CSE7766
-//#undef ENABLE_DRIVER_BL0937
-//#undef ENABLE_DRIVER_BL0942
 #define ENABLE_DRIVER_IRREMOTEESP				1
 //#endif
 //#define ENABLE_DRIVER_NEO6M						1
