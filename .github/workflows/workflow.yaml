@@ -299,7 +299,6 @@ jobs:
 
       - run: ls -la
 
-      # --- PATCH INJECTED HERE TO REPAIR REALTEK BUILD SCRIPTS ---
       - name: Patch hardcoded repository paths in prebuild scripts
         run: |
           sed -i 's|/home/runner/work/OpenBK7231T_App/OpenBK7231T_App|$GITHUB_WORKSPACE|g' platforms/RTL8720E/gh_prebuild.sh
@@ -307,7 +306,7 @@ jobs:
         shell: bash
   
       - name: Run make
-        run: make APP_VERSION=${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }} APP_NAME=${{ matrix.platform }} VARIANT="${{ matrix.variant }}" ${{ matrix.platform }}
+        run: make APP_VERSION=${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }} APP_NAME=${{ matrix.platform }} VARIANT="${{ matrix.variant }}" ${{ matrix.platform }}        run: make APP_VERSION=${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }} APP_NAME=${{ matrix.platform }} VARIANT="${{ matrix.variant }}" ${{ matrix.platform }}
 
       - name: Save build assets
         uses: actions/upload-artifact@v4
