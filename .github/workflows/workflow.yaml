@@ -1,3 +1,4 @@
+#307-312 was edited for fix for "Update workflow.yaml fix of OpenRTL8720E and such"
 name: Build App
 on:
   push:
@@ -302,6 +303,13 @@ jobs:
           sudo apt-fast install -y gcc-arm-none-eabi
 
       - run: ls -la
+
+# was replased  paches and stuff in i will continue to tipe to diferentiate this from the rest of the text and then ass ( <- ha! ) i scroll i notice this long coment and stop so i hnow i incerted something here or i jus could of remembered the line rn... whatever.
+      - name: Patch rigid prebuild paths for custom repository workspace
+        run: |
+          sed -i 's|/home/runner/work/OpenBK7231T_App/OpenBK7231T_App|$GITHUB_WORKSPACE|g' platforms/RTL8720E/gh_prebuild.sh  
+          sed -i 's|/home/runner/work/OpenBK7231T_App/OpenBK7231T_App|$GITHUB_WORKSPACE|g' platforms/RTL8721DA/gh_prebuild.sh
+        shell: bash
   
       - name: Run make
         run: make APP_VERSION=${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }} APP_NAME=${{ matrix.platform }} VARIANT="${{ matrix.variant }}" ${{ matrix.platform }}
