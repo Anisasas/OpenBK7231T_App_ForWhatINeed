@@ -9,7 +9,7 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  APP_NAME: ${{ github.event.repository.name }}
+  APP_NAME: OpenBK7231T_App_ForWhatINeed
 
 jobs:
   refs:
