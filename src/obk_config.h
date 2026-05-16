@@ -215,21 +215,26 @@
 
 #elif PLATFORM_BL602
 
-// IŠSIGELBĖJIMAS: Įjungiame TuyaMCU ir UART komandas!
+// Svarbiausi pataisymai sėkmingam build'ui:
 #define ENABLE_DRIVER_TUYAMCU                   1
 #define ENABLE_CMD_UART                         1
+#define ENABLE_DRIVER_BRIDGE					1
 
-#define ENABLE_HA_DISCOVERY 					1
+// IŠJUNGIAME HA Discovery, kad nekeltų klaidų dėl išjungtų sensorių!
+#define ENABLE_HA_DISCOVERY 					0
+
 #define ENABLE_MQTT								1
 #define ENABLE_TASMOTADEVICEGROUPS				1
 #define ENABLE_LITTLEFS							1
 #define ENABLE_NTP								1
 #define ENABLE_CALENDAR_EVENTS					1
 
-// IŠJUNGIAME nereikalingus LED ir matuoklių draiverius, kad sutaupytume vietos:
+// Įjungiame atgal šiuos du, kad kompiliatorius rastų reikiamus kintamuosius:
+#define ENABLE_DRIVER_BL0937					1
+#define ENABLE_DRIVER_BL0942					1
+
+// Visi kiti LED ir nereikalingi draiveriai lieka išjungti:
 #define ENABLE_DRIVER_LED						0
-#define ENABLE_DRIVER_BL0937					0
-#define ENABLE_DRIVER_BL0942					0
 #define ENABLE_DRIVER_CSE7766					0
 #define ENABLE_DRIVER_SM16703P					0
 #define ENABLE_DRIVER_PIXELANIM					0
@@ -239,7 +244,6 @@
 #define ENABLE_DRIVER_WEMO						1
 #define ENABLE_DRIVER_FREEZE					0
 #define ENABLE_DRIVER_DHT						1
-#define ENABLE_DRIVER_BRIDGE					1
 #define ENABLE_EXPAND_CONSTANT					1
 #define ENABLE_TASMOTA_JSON						1
 #define ENABLE_DRIVER_DDP						1
