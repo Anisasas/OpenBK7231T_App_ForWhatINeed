@@ -1,4 +1,3 @@
-#307-312 was edited for fix for "Update workflow.yaml fix of OpenRTL8720E and such"
 name: Build App
 on:
   push:
@@ -203,10 +202,6 @@ jobs:
           - platform: OpenLN8825
             variant: default
             gcc: 10.3-2021.10
-          #- platform: OpenBL616
-          #  variant: default
-          #- platform: OpenBL602_ALT
-          #  variant: default
 
           # extras for BK7231T
           - platform: OpenBK7231T
@@ -304,10 +299,10 @@ jobs:
 
       - run: ls -la
 
-# was replased  paches and stuff in i will continue to tipe to diferentiate this from the rest of the text and then ass ( <- ha! ) i scroll i notice this long coment and stop so i hnow i incerted something here or i jus could of remembered the line rn... whatever.
-      - name: Patch rigid prebuild paths for custom repository workspace
+      # --- PATCH INJECTED HERE TO REPAIR REALTEK BUILD SCRIPTS ---
+      - name: Patch hardcoded repository paths in prebuild scripts
         run: |
-          sed -i 's|/home/runner/work/OpenBK7231T_App/OpenBK7231T_App|$GITHUB_WORKSPACE|g' platforms/RTL8720E/gh_prebuild.sh  
+          sed -i 's|/home/runner/work/OpenBK7231T_App/OpenBK7231T_App|$GITHUB_WORKSPACE|g' platforms/RTL8720E/gh_prebuild.sh
           sed -i 's|/home/runner/work/OpenBK7231T_App/OpenBK7231T_App|$GITHUB_WORKSPACE|g' platforms/RTL8721DA/gh_prebuild.sh
         shell: bash
   
@@ -326,7 +321,7 @@ jobs:
             output/${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}/OpenBK7231M_QIO_${{ needs.refs.outputs.version }}.bin
             output/${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}/OpenBK7231M_ALT_QIO_${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}.bin
             output/${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}/${{ matrix.platform }}_${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}.rbl
-            output/${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}/${{ matrix.platform }}_${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}.img
+            output/${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' Bracken }}${{ matrix.variant != 'default' && matrix.variant || '' }}/${{ matrix.platform }}_${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}.img
             output/${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}/${{ matrix.platform }}_${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}.bin
             output/${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}/${{ matrix.platform }}_${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}.fls
             output/${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}/${{ matrix.platform }}_${{ needs.refs.outputs.version }}${{ matrix.variant != 'default' && '_' || '' }}${{ matrix.variant != 'default' && matrix.variant || '' }}_ota.img
@@ -428,7 +423,7 @@ jobs:
         id: cache-toolchain
         uses: actions/cache@v4
         with:
-          path: ~/.espressif # cache whole folder, not just dist
+          path: ~/.espressif
           key: ${{ matrix.sdk }}_toolchain_${{ matrix.version }}_${{ steps.pysetup.outputs.python-version }}
       - name: Get toolchain
         if: steps.cache-toolchain.outputs.cache-hit != 'true'
@@ -490,13 +485,11 @@ jobs:
     name: Merge Artifacts
     runs-on: ubuntu-22.04
     needs: [refs, build, build2, build_idf, build_txw81x]
-    #if: always() && needs.refs.outputs.new_release == 'true' && (github.ref == 'refs/heads/main' || github.ref_name == 'alpha')
     steps:
       - name: Merge Artifacts
         uses: actions/upload-artifact/merge@v4
         with:
           name: ${{ env.APP_NAME }}_${{ needs.refs.outputs.version }}
-          #delete-merged: true
 
   release:
     name: Semantic Release Images and Artifacts
@@ -530,4 +523,3 @@ jobs:
           echo ${{ steps.semantic.outputs.new_release_major_version }}
           echo ${{ steps.semantic.outputs.new_release_minor_version }}
           echo ${{ steps.semantic.outputs.new_release_patch_version }}
-          
