@@ -220,7 +220,9 @@
 #define ENABLE_CMD_UART                         1
 #define ENABLE_DRIVER_BRIDGE					1
 
-// IŠJUNGIAME HA Discovery, kad nekeltų klaidų dėl išjungtų sensorių!
+#define ENABLE_OBK_BERRY                        1
+
+// IŠJUNGIAME HA Discovery, kad nekeltų klaidų dėl išjungtų sensorių! BET KARTAIS NEREIKES MAN?
 #define ENABLE_HA_DISCOVERY 					0
 
 #define ENABLE_MQTT								1
