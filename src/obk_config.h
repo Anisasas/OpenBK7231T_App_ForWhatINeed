@@ -84,7 +84,7 @@
 #define ENABLE_TASMOTADEVICEGROUPS				1
 #define ENABLE_NTP								1
 //#define ENABLE_TIME_DST						1
-#define ENABLE_DRIVER_BL0937					1
+#define 					1
 #define ENABLE_DRIVER_DHT						1
 #define ENABLE_TASMOTA_JSON						1
 #define ENABLE_DRIVER_DS1820					1
@@ -231,9 +231,12 @@
 #define ENABLE_NTP                              1
 #define ENABLE_CALENDAR_EVENTS                  0  // IŠJUNGTAS (Sutaupo vietos)
 
-// IŠJUNGIAME energijos matavimo draiverius, kad tilptų Berry:
-#define ENABLE_DRIVER_BL0937                    0  // ĮŠJUNGTAS
-#define ENABLE_DRIVER_BL0942                    0  // ĮŠJUNGTAS
+// IŠJUNGIAME fizinius matavimo draiverius:
+#define ENABLE_DRIVER_BL0937                    0  
+#define ENABLE_DRIVER_BL0942                    0  
+
+// PRIDEDAME ŠĮ KINTAMĄJĮ, kad cmd_channels.c rastų tuščias funkcijas (Ištaiso Linker Error):
+#define ENABLE_BL_SHARED                        1  
 
 // Visi kiti LED ir nereikalingi draiveriai lieka išjungti:
 #define ENABLE_DRIVER_LED                       0
