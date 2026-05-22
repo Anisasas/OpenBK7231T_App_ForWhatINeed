@@ -218,53 +218,51 @@
 // Svarbiausi pataisymai sėkmingam build'ui:
 #define ENABLE_DRIVER_TUYAMCU                   1
 #define ENABLE_CMD_UART                         1
-#define ENABLE_DRIVER_BRIDGE					1
+#define ENABLE_DRIVER_BRIDGE                    0  // IŠJUNGTAS (Sutaupo vietos)
 
-#define ENABLE_OBK_BERRY                        1
+#define ENABLE_OBK_BERRY                        1  // ĮJUNGTAS (Atstato TuyaMCU komandas)
 
-// IŠJUNGIAME HA Discovery, kad nekeltų klaidų dėl išjungtų sensorių! BET KARTAIS NEREIKES MAN?
-#define ENABLE_HA_DISCOVERY 					0
+// IŠJUNGIAME HA Discovery, kad nekeltų klaidų dėl išjungtų sensorių! Ok supratau
+#define ENABLE_HA_DISCOVERY                     0
 
-#define ENABLE_MQTT								1
-#define ENABLE_TASMOTADEVICEGROUPS				1
-#define ENABLE_LITTLEFS							1
-#define ENABLE_NTP								1
-#define ENABLE_CALENDAR_EVENTS					1
+#define ENABLE_MQTT                             1
+#define ENABLE_TASMOTADEVICEGROUPS              0  // IŠJUNGTAS (Sutaupo vietos)
+#define ENABLE_LITTLEFS                         1
+#define ENABLE_NTP                              1
+#define ENABLE_CALENDAR_EVENTS                  0  // IŠJUNGTAS (Sutaupo vietos)
 
-// Įjungiame atgal šiuos du, kad kompiliatorius rastų reikiamus kintamuosius:
-#define ENABLE_DRIVER_BL0937					1
-#define ENABLE_DRIVER_BL0942					1
+// IŠJUNGIAME energijos matavimo draiverius, kad tilptų Berry:
+#define ENABLE_DRIVER_BL0937                    0  // ĮŠJUNGTAS
+#define ENABLE_DRIVER_BL0942                    0  // ĮŠJUNGTAS
 
 // Visi kiti LED ir nereikalingi draiveriai lieka išjungti:
-#define ENABLE_DRIVER_LED						0
-#define ENABLE_DRIVER_CSE7766					0
-#define ENABLE_DRIVER_SM16703P					0
-#define ENABLE_DRIVER_PIXELANIM					0
-#define ENABLE_DRIVER_CHT83XX					0
-#define ENABLE_DRIVER_DS1820					0
+#define ENABLE_DRIVER_LED                       0
+#define ENABLE_DRIVER_CSE7766                   0
+#define ENABLE_DRIVER_SM16703P                  0
+#define ENABLE_DRIVER_PIXELANIM                 0
+#define ENABLE_DRIVER_CHT83XX                   0
+#define ENABLE_DRIVER_DS1820                    0
 
-#define ENABLE_DRIVER_WEMO						1
-#define ENABLE_DRIVER_FREEZE					0
-#define ENABLE_DRIVER_DHT						1
-#define ENABLE_EXPAND_CONSTANT					1
-#define ENABLE_TASMOTA_JSON						1
-#define ENABLE_DRIVER_DDP						1
-#define ENABLE_DRIVER_SSDP						1
-#define ENABLE_OBK_SCRIPTING					1
-#define ENABLE_DRIVER_MDNS						1
-#define ENABLE_ADVANCED_CHANNELTYPES_DISCOVERY	1
+#define ENABLE_DRIVER_WEMO                      0  // IŠJUNGTAS (Sutaupo vietos)
+#define ENABLE_DRIVER_FREEZE                    0
+#define ENABLE_DRIVER_DHT                       0  // IŠJUNGTAS (Sutaupo vietos)
+#define ENABLE_EXPAND_CONSTANT                  1
+#define ENABLE_TASMOTA_JSON                     1
+#define ENABLE_DRIVER_DDP                       0  // IŠJUNGTAS (Sutaupo vietos)
+#define ENABLE_DRIVER_SSDP                      0  // IŠJUNGTAS (Sutaupo vietos)
+#define ENABLE_OBK_SCRIPTING                    1
+#define ENABLE_DRIVER_MDNS                      0  // IŠJUNGTAS (Sutaupo vietos)
+#define ENABLE_ADVANCED_CHANNELTYPES_DISCOVERY  1
 
 #if PLATFORM_BL_NEW
-#define NEW_TCP_SERVER							1
+#define NEW_TCP_SERVER                          1
 #endif
 
 #if (OBK_VARIANT == OBK_VARIANT_BERRY)
-#define ENABLE_OBK_BERRY						1
+#define ENABLE_OBK_BERRY                        1
 #endif
-#define ENABLE_DRIVER_IRREMOTEESP				1
-//#endif
-//#define ENABLE_DRIVER_NEO6M						1
-#define ENABLE_DRIVER_TINYIR_NEC				1
+#define ENABLE_DRIVER_IRREMOTEESP               0  // IŠJUNGTAS (Sutaupo vietos)
+#define ENABLE_DRIVER_TINYIR_NEC                0  // IŠJUNGTAS (Sutaupo vietos)
 // allow testing, remove before merging
 //#define ENABLE_DRIVER_DCF77					1
 
