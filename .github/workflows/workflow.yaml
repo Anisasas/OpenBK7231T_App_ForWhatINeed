@@ -299,7 +299,6 @@ jobs:
 
       - run: ls -la
 
-      # ---> ADD THIS ACCURATE SAFETY NET STEP HERE <---
       - name: Create symlink safety net for hardcoded paths
         run: |
           sudo mkdir -p /home/runner/work/OpenBK7231T_App
@@ -384,7 +383,7 @@ jobs:
             variant: default
             version: v3.4
             sdk: OpenESP8266
-steps:
+    steps:
       - name: Source checkout
         uses: actions/checkout@v4
 
@@ -441,7 +440,6 @@ steps:
         with:
           path: ~/.espressif
           key: ${{ matrix.sdk }}_toolchain_${{ matrix.version }}_${{ steps.pysetup.outputs.python-version }}
-# ... (your previous cache-toolchain step is above this)
       - name: Get toolchain
         if: steps.cache-toolchain.outputs.cache-hit != 'true'
         run: |
