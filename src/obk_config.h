@@ -751,5 +751,10 @@
 #undef ENABLE_DRIVER_IR
 #endif
 
+// Fix for missing portTICK_PERIOD_MS on non-FreeRTOS platforms (RDA5981 / TXW81X)
+#ifndef portTICK_PERIOD_MS
+  #define portTICK_PERIOD_MS 1
+#endif
+
 // closing OBK_CONFIG_H
 #endif
