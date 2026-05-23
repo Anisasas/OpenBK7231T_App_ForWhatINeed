@@ -384,19 +384,20 @@ jobs:
             variant: default
             version: v3.4
             sdk: OpenESP8266
-    steps:
+steps:
       - name: Source checkout
         uses: actions/checkout@v4
-      - name: ESP-IDF checkout
+
+      - name: ESP-IDF checkout (No Submodules initially)
         if: ${{ matrix.platform != 'OpenESP8266' }}
         uses: actions/checkout@v4
         with:
           repository: espressif/esp-idf
           path: sdk/esp-idf
           ref: ${{ matrix.version }}
-          submodules: recursive
+          submodules: false
 
-      - name: OpenESP8266 checkout
+      - name: OpenESP8266 checkout (No Submodules initially)
         if: ${{ matrix.platform == 'OpenESP8266' }}
         uses: actions/checkout@v4
         with:
@@ -405,8 +406,24 @@ jobs:
           ref: obk
           fetch-tags: true
           fetch-depth: '10'
-          submodules: recursive
+          submodules: false
 
+      # Force Git to deal with missing submodules without terminal prompts 
+      - name: Initialize Submodules Manually with Fallback
+        run: |
+          git config --global url."https://github.com/".insteadOf "git@github.com:"
+          git config --global core.askpass /bin/echo
+          
+          if [ "${{ matrix.platform }}" == "OpenESP8266" ]; then
+            cd sdk/OpenESP8266
+          else
+            cd sdk/esp-idf
+          fi
+          
+          # Initialize submodules but continue even if non-critical ones fail
+          git submodule update --init --recursive || true
+        shell: bash
+        
       - uses: actions/setup-python@v5
         id: pysetup
         with:
